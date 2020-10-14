@@ -1,0 +1,31 @@
+{
+  "name": "food-delivery-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon -d server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hewbahrami/food-delivery-app.git"
+  },
+  "author": "hewah bahrami",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hewbahrami/food-delivery-app/issues"
+  },
+  "homepage": "https://github.com/hewbahrami/food-delivery-app#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-sessions": "^1.0.6",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "pg": "^8.3.3"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "faker": "^5.1.0"
+  }
+}
