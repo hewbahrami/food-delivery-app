@@ -10,7 +10,7 @@ let customFields = {
 
 let verifyCallback = (email, pass, done) => {
 
-    let queryStr = `SELECT * from user_info WHERE email = '${email}';`
+    let queryStr = `SELECT * from user WHERE email = '${email}';`
     connection.query(queryStr, function(err, user) {
 
       if (err) {
@@ -42,7 +42,7 @@ passport.serializeUser((user, done) => { // serialization of sessions
 
 passport.deserializeUser((email, callback) => {
   if (email) {
-      connection.query(`SELECT id, email FROM user_info where email='${email}';`, (err, results) => {
+      connection.query(`SELECT id, email FROM user where email='${email}';`, (err, results) => {
         if(results.rows.length < 1) {
           return callback("No email was found in database")
         }
