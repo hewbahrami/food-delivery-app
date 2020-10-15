@@ -5,7 +5,8 @@
   "main": "server/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon -d server/index.js"
+    "server": "nodemon -d server/index.js",
+    "build": "webpack --watch"
   },
   "repository": {
     "type": "git",
@@ -22,10 +23,18 @@
     "express-sessions": "^1.0.6",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "pg": "^8.3.3"
+    "pg": "^8.3.3",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.0",
+    "@babel/preset-env": "^7.12.0",
+    "@babel/preset-react": "^7.10.4",
+    "babel-loader": "^8.1.0",
     "dotenv": "^8.2.0",
-    "faker": "^5.1.0"
+    "faker": "^5.1.0",
+    "webpack": "^5.1.2",
+    "webpack-cli": "^4.0.0"
   }
 }
