@@ -2,7 +2,7 @@ const Pool = require('pg').Pool;
 require('dotenv').config();
 
 const config = {
-  user: 'hewbahrami',
+  user: 'postgres',
   database: 'foodapp',
   password: '',
   port: 5432

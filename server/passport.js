@@ -1,43 +1,33 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const connection = require('../database/index.js'); // database connection
-const validatePassword = require('./lib/passwordUtils.js').validatePassword;
 
-let customFields = {
-    usernameField: 'email',
-    passwordField: 'pass'
+let loginInfo = {
+  username: 'email',
+  password: 'pass'
 }
 
-let verifyCallback = (email, pass, done) => {
-
-    let queryStr = `SELECT * from users WHERE email = '${email}';`
-    connection.query(queryStr, function(err, user) {
-
+passport.use(new LocalStrategy(loginInfo,
+  (email, pass, done) => {
+    let queryUser = `SELECT * from users WHERE email = '${email}';`;
+    connection.query(queryUser, (err, user) => {
       if (err) {
-          return done(err);
+        return done(err)
+      }
+      if (!user || user.row.length < 1) {
+        return done(null, false, { message: 'Incorrect username.' })
+      }
+      if (!user.validPassword(pass)) {
+        return done(null, false, { message: 'Incorrect password.' });
       }
 
-      if (!user || user.rows.length < 1) { // case where username doesn't exist
-        return done(null, false, { message: 'Incorrect username.' });
-      }
-
-
-
-      if (!validatePassword(pass, user.rows[0].pass, user.rows[0].salt) || pass.length < 1) {
-        return done(null, false, { message: 'Incorrect password.'}); // success case based on validPassword
-      }
-      return done(null, user.rows); // fail case based on validPassword
-
-    });
-}
-
-let strategy = new LocalStrategy(customFields, verifyCallback);
-passport.use(strategy);
-
-
+      return done(null, user)
+    })
+  }
+))
 
 passport.serializeUser((user, done) => { // serialization of sessions
-    done(null, user[0].email)
+  done(null, user[0].email)
 })
 
 passport.deserializeUser((email, callback) => {
@@ -52,3 +42,4 @@ passport.deserializeUser((email, callback) => {
         callback("Could not deserialize user with email of " + email, null)
     }
   })
+
