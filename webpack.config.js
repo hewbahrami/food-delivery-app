@@ -10,7 +10,9 @@ module.exports = {
     rules: [
       {
         test: /\.(jsx|js)$/,
-        include: path.resolve(__dirname, 'client/src'),
+        resolve: {
+          extensions: ['.js', '.jsx'],
+        },
         use: [{
           loader: 'babel-loader',
           options: {
