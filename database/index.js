@@ -3,7 +3,7 @@ require('dotenv').config();
 
 const config = {
   user: 'hewbahrami',
-  database: 'foodapp-users',
+  database: 'foodapp',
   password: '',
   port: 5432
 }
