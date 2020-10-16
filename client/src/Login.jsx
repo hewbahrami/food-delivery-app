@@ -13,7 +13,14 @@ const Login = () => {
 
   return (
     <div>
-
+      <div className="jumbotron">Login</div>
+      <div>
+        <form>
+          <input type="text" name="email" placeholder="Email" className="form-control my-4"></input>
+          <input type="text" name="pass" placeholder="Password" className="form-control my-4"></input>
+          <button type="button" className="btn btn-block btn-secondary">Login</button>
+        </form>
+      </div>
     </div>
   )
 }
