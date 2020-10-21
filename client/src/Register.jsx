@@ -21,13 +21,13 @@ const Register = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
-    const { firstName, lastName, email, pass, passConfirm } = userState;
+    const { firstName, lastName, phone, email, pass, passConfirm } = userState;
     if (!email.includes('@')) {
       window.alert("Please enter a valid email address")
     } else if (pass !== passConfirm) {
       window.alert("Password incorrect. Please re-enter a valid password")
     } else {
-      axios.post('/register', { firstName, lastName, email, pass })
+      axios.post('/register', { firstName, lastName, phone, email, pass })
         .then((res) => {
           console.log(res)
         })
