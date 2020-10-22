@@ -6,7 +6,7 @@ const passport = require('passport');
 const db = require('../database/index.js');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const hash = require('./authenticate.js');
+const authenticate = require('./authenticate.js');
 const queryFunctions = require('../database/controller.js');
 
 app.use(bodyParser.json());
@@ -23,12 +23,30 @@ app.use(cookieParser("chismosaymimosa"));
 
 app.use(passport.initialize());
 app.use(passport.session());
+require('./passport.js')(passport);
+
 
 app.use('/', express.static(path.join(__dirname, '../public')));
-app.use('/register', express.static(path.join(__dirname, '../public')));
+// app.use('/register', express.static(path.join(__dirname, '../public')));
 app.use('/login', express.static(path.join(__dirname, '../public')));
 
 
+app.post('/login', (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+    // console.log(user)
+    if (err) {
+      return next(err);
+    } if (!user) {
+      res.send('No user exists')
+    } else {
+      req.logIn(user, err => {
+        if (err) throw(err);
+        res.send('Successfully Authenticated');
+        console.log(req.user)
+      })
+    }
+  })(req, res, next)
+})
 
 app.post('/register', (req, res) => {
   const {firstName, lastName, phone, email, pass} = req.body;
@@ -36,7 +54,7 @@ app.post('/register', (req, res) => {
     if (err) {
       console.log(err)
     } if (!result.length) {
-      hash(pass, 10, (err, hash) => {
+      authenticate.hashPassword(pass, 10, (err, hash) => {
         if (err) {
           console.log(err)
         } else {
