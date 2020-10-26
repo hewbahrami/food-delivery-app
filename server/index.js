@@ -71,6 +71,10 @@ app.post('/register', (req, res) => {
   })
 })
 
+app.get('/neighborhoods', (req, res) => {
+
+})
+
 const port = 1234;
 
 app.listen(port, () => console.log(`Connected to port ${port}`))

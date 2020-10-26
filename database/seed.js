@@ -75,3 +75,5 @@ const addRestaurantToDB = () => {
 
 addUserToDB();
 addRestaurantToDB();
+
+module.exports = neighborhoods;

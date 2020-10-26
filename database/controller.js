@@ -15,8 +15,3 @@ module.exports = {
     });
   }
 };
-
-// const addNewUser = (user, callback) => {
-//   let insertUser = `INSERT INTO users (“firstName”, “lastName”, email, password) VALUES ('${user.firstName}', '${user.lastName}', ''${user.email}', ${user.password}')`;
-//   })
-// }
