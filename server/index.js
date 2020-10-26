@@ -27,7 +27,7 @@ require('./passport.js')(passport);
 
 
 app.use('/', express.static(path.join(__dirname, '../public')));
-// app.use('/register', express.static(path.join(__dirname, '../public')));
+app.use('/register', express.static(path.join(__dirname, '../public')));
 app.use('/login', express.static(path.join(__dirname, '../public')));
 
 
@@ -40,7 +40,7 @@ app.post('/login', (req, res, next) => {
       res.send('No user exists')
     } else {
       req.logIn(user, err => {
-        if (err) throw(err);
+        if (err) throw (err);
         res.send('Successfully Authenticated');
         console.log(req.user)
       })
@@ -49,22 +49,24 @@ app.post('/login', (req, res, next) => {
 })
 
 app.post('/register', (req, res) => {
-  const {firstName, lastName, phone, email, pass} = req.body;
+  const { firstName, lastName, phone, email, pass } = req.body;
   queryFunctions.getUserByEmail(req.body, (err, result) => {
     if (err) {
-      console.log(err)
+      throw (err)
     } if (!result.length) {
       authenticate.hashPassword(pass, 10, (err, hash) => {
         if (err) {
-          console.log(err)
+          throw (err)
         } else {
-          req.body.pass = hash
+          req.body.pass = hash;
           queryFunctions.addNewUser(req.body, (err, result) => {
             if (err) throw err;
-            console.log(result)
+            res.send('Registered!')
           })
         }
       })
+    } else {
+      res.send('User already exists')
     }
   })
 })

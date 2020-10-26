@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/index.js",
     "dev": "nodemon -d server/index.js",
-    "build": "webpack --watch"
+    "build": "webpack --watch",
+    "db": "psql -U postgres <schema.sql"
   },
   "repository": {
     "type": "git",
@@ -40,6 +41,7 @@
     "babel-loader": "^8.1.0",
     "dotenv": "^8.2.0",
     "faker": "^5.1.0",
+    "unique-names-generator": "^4.3.1",
     "webpack": "^5.1.2",
     "webpack-cli": "^4.0.0"
   }

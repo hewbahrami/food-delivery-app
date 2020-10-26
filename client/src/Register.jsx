@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
   const [userState, setUserState] = useState({
@@ -29,7 +30,7 @@ const Register = () => {
     } else {
       axios.post('/register', { firstName, lastName, phone, email, pass })
         .then((res) => {
-          console.log(res)
+          window.alert(res.data)
         })
         .catch((err) => {
           console.log(err)
@@ -68,7 +69,7 @@ const Register = () => {
           ></input>
           <input
             onChange={handleInputChange}
-            type="text"
+            type="password"
             name="pass"
             placeholder="Password"
             className="form-control my-4"
@@ -76,7 +77,7 @@ const Register = () => {
           ></input>
           <input
             onChange={handleInputChange}
-            type="text"
+            type="password"
             name="passConfirm"
             placeholder="Re-enter Password"
             className="form-control my-4"
@@ -87,6 +88,9 @@ const Register = () => {
             type="button"
             className="btn btn-block btn-secondary">Register</button>
         </form>
+        <div>
+          Already have an account? <Link to='/login'><span>Sign in here.</span></Link>
+        </div>
       </div>
     </div>
   )
