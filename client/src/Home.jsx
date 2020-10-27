@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar.jsx';
+import './styles/Home.css';
 
 const Home = () => {
   return (
@@ -11,7 +12,9 @@ const Home = () => {
       <Link to='/register'>
         <button>Sign Up</button>
       </Link>
+      <div className="search-component">
       <SearchBar />
+      </div>
     </div>
   )
 }
