@@ -16,7 +16,6 @@ const SearchBar = () => {
     }
     setText(value);
     setSuggestions(locations)
-    console.log(suggestions)
   }
   const renderSuggestions = () => {
     if (suggestions.length === 0) return null;
@@ -34,11 +33,12 @@ const SearchBar = () => {
   const handleSubmit = e => {
     e.preventDefault();
     //make axios call
-
+    axios.get(`/restaurants/${text}`)
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err))
   };
 
   const handleKeypress = e => {
-    //it triggers by pressing the enter key
     if (e.keyCode === 13) {
       handleSubmit();
     }
@@ -60,9 +60,9 @@ const SearchBar = () => {
       </div>
       <div>
         <button
-        className="search-submit"
-        type="submit"
-        onClick={handleSubmit}>S</button>
+          className="search-submit"
+          type="submit"
+          onClick={handleSubmit}>S</button>
       </div>
     </div>
   )

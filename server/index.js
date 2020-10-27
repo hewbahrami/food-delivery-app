@@ -71,8 +71,12 @@ app.post('/register', (req, res) => {
   })
 })
 
-app.get('/neighborhoods', (req, res) => {
-
+app.get('/restaurants/:neighborhood', (req, res) => {
+  const { neighborhood } = req.params;
+  queryFunctions.getRestaurants(neighborhood, (err, result) => {
+    if (err) throw err;
+    res.send(result.rows)
+  })
 })
 
 const port = 1234;

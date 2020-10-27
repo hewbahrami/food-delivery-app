@@ -13,5 +13,12 @@ module.exports = {
       if (err) throw err;
       callback(null, result);
     });
+  },
+  getRestaurants: (neighborhood, callback) => {
+    let searchRestaurants = `SELECT * FROM restaurants WHERE neighborhood = '${neighborhood}'`;
+    db.query(searchRestaurants, (err, result) => {
+      if (err) throw err;
+      callback(null, result);
+    });
   }
 };
